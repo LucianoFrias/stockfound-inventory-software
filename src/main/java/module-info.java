@@ -10,7 +10,9 @@ module org.stockfound.stockfoundinventorysoftware {
     exports org.stockfound.stockfoundinventorysoftware.controllers;
     exports org.stockfound.stockfoundinventorysoftware.entities;
     exports org.stockfound.stockfoundinventorysoftware.database;
+    exports org.stockfound.stockfoundinventorysoftware.services;
     opens org.stockfound.stockfoundinventorysoftware.controllers to javafx.fxml;
     opens org.stockfound.stockfoundinventorysoftware.entities to javafx.fxml;
     opens org.stockfound.stockfoundinventorysoftware.database to javafx.fxml;
+    opens org.stockfound.stockfoundinventorysoftware.services to javafx.fxml;
 }

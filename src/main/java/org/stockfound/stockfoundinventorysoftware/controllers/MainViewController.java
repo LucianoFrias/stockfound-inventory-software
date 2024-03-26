@@ -13,20 +13,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.stockfound.stockfoundinventorysoftware.database.Database;
-import org.stockfound.stockfoundinventorysoftware.database.ItemRepository;
-import org.stockfound.stockfoundinventorysoftware.database.PostgreSQLDatabase;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
+import org.stockfound.stockfoundinventorysoftware.services.ItemService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
 
     // Classes
-    private final ItemRepository itemRepository;
+    private final ItemService itemService;
 
     // FXML
     @FXML
@@ -40,15 +37,15 @@ public class MainViewController implements Initializable {
     @FXML
     private TableColumn<Item, String> customerNameColumn;
     @FXML
+    private TableColumn<Item, String> typeColumn;
+    @FXML
+    private TableColumn<Item, String> brandColumn;
+    @FXML
+    private TableColumn<Item, String> modelColumn;
+    @FXML
     private TableColumn<Item, String> statusColumn;
     @FXML
-    private TableColumn<Item, Boolean> invoiceColumn;
-    @FXML
-    private TableColumn<Item, Boolean> packedColumn;
-    @FXML
-    private TableColumn<Item, Boolean> shippedColumn;
-    @FXML
-    private TableColumn<Item, Integer> amountColumn;
+    private TableColumn<Item, Integer> priceColumn;
 
     // Buttons
     @FXML
@@ -59,14 +56,13 @@ public class MainViewController implements Initializable {
     private Button editItemButton;
 
     public MainViewController(){
-        Database database = new PostgreSQLDatabase("localhost", "5432", "stockfound_database", "postgres", "120708LUciano");
-        this.itemRepository = new ItemRepository(database);
+        this.itemService = new ItemService();
     }
 
     @FXML
     public void showAddItemPopUp(ActionEvent e) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/add-item-popup.fxml"));
-        loader.setControllerFactory(param -> new CrudButtonsController(this));
+        loader.setControllerFactory(param -> new AddItemViewController(this));
         Parent root = null;
 
         try {
@@ -89,14 +85,12 @@ public class MainViewController implements Initializable {
     @FXML
     public void deleteItem(ActionEvent e) {
         Item item = itemTableView.getSelectionModel().getSelectedItem();
-
-        itemRepository.deleteItem(item.getSerialNumber());
-
+        itemService.deleteItem(item.getSerialNumber());
         fillTable();
     }
 
     public void fillTable() {
-        ObservableList<Item> items = itemRepository.getAllItems();
+        ObservableList<Item> items = itemService.getAllItems();
 
         itemTableView.setItems(items);
         itemTableView.refresh();
@@ -107,11 +101,11 @@ public class MainViewController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         serialNumberColumn.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-        invoiceColumn.setCellValueFactory(new PropertyValueFactory<>("invoice"));
-        packedColumn.setCellValueFactory(new PropertyValueFactory<>("packed"));
-        shippedColumn.setCellValueFactory(new PropertyValueFactory<>("shipped"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         fillTable();
     }

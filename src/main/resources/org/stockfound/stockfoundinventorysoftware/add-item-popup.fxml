@@ -1,50 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stockfound.stockfoundinventorysoftware.controllers.CrudButtonsController">
+<AnchorPane prefHeight="475.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stockfound.stockfoundinventorysoftware.controllers.AddItemViewController">
    <children>
-      <Label alignment="CENTER" layoutX="111.0" layoutY="18.0" text="serial_number">
+      <Label alignment="CENTER" layoutX="104.0" layoutY="88.0" text="Customer Name">
          <font>
             <Font name="Cambria Math" size="24.0" />
          </font></Label>
-      <Label alignment="CENTER" layoutX="104.0" layoutY="65.0" text="customer_name">
+      <Label alignment="CENTER" layoutX="153.0" layoutY="256.0" text="Status">
          <font>
             <Font name="Cambria Math" size="24.0" />
          </font></Label>
-      <Label alignment="CENTER" layoutX="148.0" layoutY="184.0" text="packed">
+      <Label alignment="CENTER" layoutX="158.0" layoutY="297.0" text="Price">
          <font>
             <Font name="Cambria Math" size="24.0" />
          </font></Label>
-      <Label alignment="CENTER" layoutX="154.0" layoutY="108.0" text="status">
+      <TextField fx:id="customerNameTextField" layoutX="276.0" layoutY="89.0" />
+      <TextField fx:id="priceTextField" layoutX="276.0" layoutY="299.0" />
+      <Button fx:id="addItemButton" layoutX="318.0" layoutY="416.0" mnemonicParsing="false" onAction="#onClickAddItemButton" text="Add Item" />
+      <Button fx:id="cancelButton" layoutX="192.0" layoutY="416.0" mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
+      <ChoiceBox fx:id="statusChoiceBox" layoutX="276.0" layoutY="258.0" prefWidth="150.0" />
+      <Label alignment="CENTER" layoutX="110.0" layoutY="46.0" text="Serial Number">
          <font>
             <Font name="Cambria Math" size="24.0" />
-         </font></Label>
-      <Label alignment="CENTER" layoutX="145.0" layoutY="224.0" text="shipped">
+         </font>
+      </Label>
+      <TextField fx:id="serialNumberTextField" layoutX="276.0" layoutY="49.0" />
+      <Label alignment="CENTER" layoutX="132.0" layoutY="129.0" text="Item Type">
          <font>
             <Font name="Cambria Math" size="24.0" />
-         </font></Label>
-      <Label layoutX="148.0" layoutY="147.0" text="invoice">
+         </font>
+      </Label>
+      <ChoiceBox fx:id="typeChoiceBox" layoutX="276.0" layoutY="131.0" prefWidth="150.0" />
+      <Label alignment="CENTER" layoutX="153.0" layoutY="168.0" text="Brand">
          <font>
             <Font name="Cambria Math" size="24.0" />
-         </font></Label>
-      <Label alignment="CENTER" layoutX="146.0" layoutY="260.0" text="amount">
+         </font>
+      </Label>
+      <TextField fx:id="brandTextField" layoutX="277.0" layoutY="170.0" />
+      <Label alignment="CENTER" layoutX="153.0" layoutY="210.0" text="Model">
          <font>
             <Font name="Cambria Math" size="24.0" />
-         </font></Label>
-      <TextField fx:id="serialNumberTextField" layoutX="276.0" layoutY="19.0" />
-      <TextField fx:id="customerNameTextField" layoutX="276.0" layoutY="66.0" />
-      <TextField fx:id="statusTextField" layoutX="276.0" layoutY="109.0" />
-      <TextField fx:id="amountTextField" layoutX="276.0" layoutY="263.0" />
-      <Button fx:id="addItemButton" layoutX="318.0" layoutY="316.0" mnemonicParsing="false" onAction="#onClickAddItemButton" text="Add Item" />
-      <Button fx:id="cancelButton" layoutX="194.0" layoutY="316.0" mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
-      <CheckBox fx:id="invoiceCheckBox" layoutX="343.0" layoutY="153.0" mnemonicParsing="false" />
-      <CheckBox fx:id="packedCheckBox" layoutX="343.0" layoutY="190.0" mnemonicParsing="false" />
-      <CheckBox fx:id="shippedCheckBox" layoutX="343.0" layoutY="230.0" mnemonicParsing="false" />
+         </font>
+      </Label>
+      <TextField fx:id="modelTextField" layoutX="277.0" layoutY="212.0" />
    </children>
 </AnchorPane>

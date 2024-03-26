@@ -8,41 +8,41 @@ public class Item {
         private Date date;
         private String serialNumber;
         private String customerName;
+        private String type;
+        private String brand;
+        private String model;
         private String status;
-        private boolean invoice;
-        private boolean packed;
-        private boolean shipped;
-        private int amount;
+        private int price;
 
 
-    public Item(Date date, String serialNumber, String customerName, String status, boolean invoice, boolean packed, boolean shipped, int amount) {
+    public Item(Date date, String serialNumber, String customerName, String type, String brand, String model, String status, int price) {
         this.date = date;
         this.serialNumber = serialNumber;
         this.customerName = customerName;
+        this.type = type;
+        this.brand = brand;
+        this.model = model;
         this.status = status;
-        this.invoice = invoice;
-        this.packed = packed;
-        this.shipped = shipped;
-        this.amount = amount;
+        this.price = price;
     }
 
-    public Item(Integer id, Date date, String serialNumber, String customerName, String status, boolean invoice, boolean packed, boolean shipped, int amount) {
+    public Item(Integer id, Date date, String serialNumber, String customerName, String type, String brand, String model, String status, int price) {
         this.id = id;
         this.date = date;
         this.serialNumber = serialNumber;
         this.customerName = customerName;
+        this.type = type;
+        this.brand = brand;
+        this.model = model;
         this.status = status;
-        this.invoice = invoice;
-        this.packed = packed;
-        this.shipped = shipped;
-        this.amount = amount;
+        this.price = price;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -54,12 +54,44 @@ public class Item {
         this.date = date;
     }
 
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
     public String getCustomerName() {
         return customerName;
     }
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public String getStatus() {
@@ -70,43 +102,11 @@ public class Item {
         this.status = status;
     }
 
-    public boolean isInvoice() {
-        return invoice;
+    public int getPrice() {
+        return price;
     }
 
-    public void setInvoice(boolean invoice) {
-        this.invoice = invoice;
-    }
-
-    public boolean isPacked() {
-        return packed;
-    }
-
-    public void setPacked(boolean packed) {
-        this.packed = packed;
-    }
-
-    public boolean isShipped() {
-        return shipped;
-    }
-
-    public void setShipped(boolean shipped) {
-        this.shipped = shipped;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
+    public void setPrice(int price) {
+        this.price = price;
     }
 }
