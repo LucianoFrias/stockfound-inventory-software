@@ -7,8 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
 import org.stockfound.stockfoundinventorysoftware.services.ItemService;
 
@@ -19,10 +19,12 @@ import java.util.ResourceBundle;
 
 import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.closeWindow;
 
-public class AddItemViewController implements Initializable {
+public class EditItemViewController implements Initializable {
     private final ItemService itemService;
     private final MainViewController mainViewController;
 
+    @FXML
+    private Label idLabel;
     @FXML
     private TextField serialNumberTextField;
     @FXML
@@ -38,22 +40,19 @@ public class AddItemViewController implements Initializable {
     @FXML
     private TextField priceTextField;
     @FXML
-    private Button addItemButton;
+    private Button editItemButton;
     @FXML
     private Button cancelButton;
 
-    public AddItemViewController(MainViewController mainViewController){
+    public EditItemViewController(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
         this.itemService = new ItemService();
     }
 
     @FXML
-    public void onClickCancelButton(ActionEvent e){
-        closeWindow(cancelButton.getScene().getWindow());
-    }
-    @FXML
-    public void onClickAddItemButton() {
+    public void onClickEditItemButton() {
         Item item = new Item(
+                Integer.parseInt(idLabel.getText()),
                 Date.valueOf(LocalDate.now()),
                 serialNumberTextField.getText(),
                 customerNameTextField.getText(),
@@ -64,14 +63,32 @@ public class AddItemViewController implements Initializable {
                 Integer.parseInt(priceTextField.getText())
         );
 
-        itemService.addItem(item);
+        itemService.updateItem(item);
         mainViewController.fillTable();
 
         closeWindow(cancelButton.getScene().getWindow());
     }
+    @FXML
+    public void onClickCancelButton(ActionEvent e){
+        closeWindow(cancelButton.getScene().getWindow());
+    }
 
+    public void populateTextFields(){
+        Item item = mainViewController.getItemTableView().getSelectionModel().getSelectedItem();
+
+        serialNumberTextField.setText(item.getSerialNumber());
+        customerNameTextField.setText(item.getCustomerName());
+        typeChoiceBox.getSelectionModel().select(item.getType());
+        brandTextField.setText(item.getBrand());
+        modelTextField.setText(item.getModel());
+        statusChoiceBox.getSelectionModel().select(item.getStatus());
+        priceTextField.setText(Integer.toString(item.getPrice()));
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        idLabel.setText(Integer.toString(mainViewController.getItemTableView().getSelectionModel().getSelectedItem().getId()));
+
         ObservableList<String> statusChoices = FXCollections.observableArrayList(
                 "NEW",
                 "USED",
@@ -102,5 +119,8 @@ public class AddItemViewController implements Initializable {
         typeChoiceBox.getItems().removeAll(typeChoiceBox.getItems());
         typeChoiceBox.getItems().addAll(typeChoices);
         typeChoiceBox.getSelectionModel().selectFirst();
+
+        populateTextFields();
+
     }
 }

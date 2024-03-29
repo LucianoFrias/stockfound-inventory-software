@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class Item {
-        private Integer id;
+        private int id;
         private Date date;
         private String serialNumber;
         private String customerName;
@@ -26,7 +26,7 @@ public class Item {
         this.price = price;
     }
 
-    public Item(Integer id, Date date, String serialNumber, String customerName, String type, String brand, String model, String status, int price) {
+    public Item(int id, Date date, String serialNumber, String customerName, String type, String brand, String model, String status, Integer price) {
         this.id = id;
         this.date = date;
         this.serialNumber = serialNumber;
@@ -38,11 +38,11 @@ public class Item {
         this.price = price;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

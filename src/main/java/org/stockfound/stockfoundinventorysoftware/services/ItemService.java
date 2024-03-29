@@ -19,9 +19,9 @@ public class ItemService {
         return itemRepository.getAllItems();
     }
 
-    public void deleteItem(String serialNumber){
+    public void deleteItem(int id){
 
-        itemRepository.deleteItem(serialNumber);
+        itemRepository.deleteItem(id);
     }
 
     public void addItem(Item item){
@@ -29,4 +29,7 @@ public class ItemService {
     }
 
 
+    public void updateItem(Item item) {
+        itemRepository.updateItem(item);
+    }
 }

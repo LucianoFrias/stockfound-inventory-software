@@ -31,6 +31,8 @@ public class MainViewController implements Initializable {
 
     // Columns
     @FXML
+    private TableColumn<Item, Integer> idColumn;
+    @FXML
     private TableColumn<Item, String> dateColumn;
     @FXML
     private TableColumn<Item, String> serialNumberColumn;
@@ -83,10 +85,45 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    public void deleteItem(ActionEvent e) {
-        Item item = itemTableView.getSelectionModel().getSelectedItem();
-        itemService.deleteItem(item.getSerialNumber());
-        fillTable();
+    public void showDeleteItemPopup(ActionEvent e) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/delete-item-popup.fxml"));
+        loader.setControllerFactory(param -> new DeleteItemViewController(this));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        Stage deleteItemPopupStage = new Stage();
+        deleteItemPopupStage.initModality(Modality.APPLICATION_MODAL);
+        deleteItemPopupStage.setTitle("Delete Item");
+        deleteItemPopupStage.setScene(new Scene(root));
+
+
+        deleteItemPopupStage.show();
+    }
+
+    @FXML
+    public void showEditItemPopup(ActionEvent e){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/edit-item-popup.fxml"));
+        loader.setControllerFactory(param -> new EditItemViewController(this));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        Stage editItemPopupStage = new Stage();
+        editItemPopupStage.initModality(Modality.APPLICATION_MODAL);
+        editItemPopupStage.setTitle("Edit Item");
+        editItemPopupStage.setScene(new Scene(root));
+
+
+        editItemPopupStage.show();
     }
 
     public void fillTable() {
@@ -96,8 +133,13 @@ public class MainViewController implements Initializable {
         itemTableView.refresh();
     }
 
+    public TableView<Item> getItemTableView() {
+        return itemTableView;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         serialNumberColumn.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));

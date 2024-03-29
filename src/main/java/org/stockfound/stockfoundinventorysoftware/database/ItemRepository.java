@@ -44,14 +44,14 @@ public class ItemRepository {
 
     }
 
-    public void deleteItem(String serialNumber) {
+    public void deleteItem(int id) {
         Connection connection = database.connect();
 
-        String sqlQuery = "delete from items.item where serial_number = ?";
+        String sqlQuery = "delete from items.item where id = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.NO_GENERATED_KEYS);
-            statement.setString(1, serialNumber);
+            statement.setInt(1, id);
 
             statement.executeUpdate();
 
@@ -60,6 +60,32 @@ public class ItemRepository {
             throw new RuntimeException(e);
         }
 
+    }
+
+
+    public void updateItem(Item item) {
+        Connection connection = database.connect();
+
+        String sqlQuery = "UPDATE items.item SET id=?, serial_number=?,customer_name=?,type=?,brand=?,model=?,status=?,price=? WHERE id=?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.NO_GENERATED_KEYS);
+            statement.setInt(1, item.getId());
+            statement.setString(2, item.getSerialNumber());
+            statement.setString(3, item.getCustomerName());
+            statement.setString(4, item.getType());
+            statement.setString(5, item.getBrand());
+            statement.setString(6, item.getModel());
+            statement.setString(7, item.getStatus());
+            statement.setInt(8, item.getPrice());
+            statement.setInt(9, item.getId());
+
+            statement.executeUpdate();
+            connection.close();
+
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public ObservableList<Item> getAllItems() {
@@ -73,6 +99,7 @@ public class ItemRepository {
         while (rs.next())
         {
             Item item = new Item(
+                    rs.getInt("id"),
                     rs.getDate("date"),
                     rs.getString("serial_number"),
                     rs.getString("customer_name"),

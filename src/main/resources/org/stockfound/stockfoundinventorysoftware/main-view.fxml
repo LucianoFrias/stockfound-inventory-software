@@ -37,30 +37,31 @@
                   <Font name="Cambria" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="deleteItemButton" layoutX="788.0" layoutY="16.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="25.0" prefWidth="111.0" text="Delete Item">
+            <Button fx:id="deleteItemButton" layoutX="905.0" layoutY="16.0" mnemonicParsing="false" onAction="#showDeleteItemPopup" prefHeight="25.0" prefWidth="111.0" text="Delete Item">
                <font>
                   <Font name="Cambria" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="editItemButton" layoutX="905.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Edit Item">
-               <font>
-                  <Font name="Cambria" size="12.0" />
-               </font></Button>
             <TextField layoutX="14.0" layoutY="16.0" promptText="Search..." />
             <Label layoutX="477.0" layoutY="11.0" text="Items">
                <font>
                   <Font name="Bookman Old Style" size="28.0" />
                </font>
             </Label>
+            <Button fx:id="editItemButton" layoutX="788.0" layoutY="16.0" mnemonicParsing="false" onAction="#showEditItemPopup" prefHeight="25.0" prefWidth="111.0" text="Edit Item">
+               <font>
+                  <Font name="Cambria" size="12.0" />
+               </font></Button>
          </children></Pane>
       <TableView fx:id="itemTableView" editable="true" layoutY="103.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="447.0" prefWidth="1030.0">
         <columns>
+            <TableColumn fx:id="idColumn" editable="false" prefWidth="100.0" sortable="false" text="ID" />
           <TableColumn fx:id="dateColumn" editable="false" prefWidth="100.0" sortable="false" text="Date" />
           <TableColumn fx:id="serialNumberColumn" editable="false" prefWidth="100.0" sortable="false" text="Serial Number" />
-            <TableColumn fx:id="customerNameColumn" editable="false" prefWidth="100.0" sortable="false" text="Customer Name" />
             <TableColumn fx:id="typeColumn" editable="false" prefWidth="100.0" sortable="false" text="Type" />
             <TableColumn fx:id="brandColumn" editable="false" prefWidth="116.0" sortable="false" text="Brand" />
             <TableColumn fx:id="modelColumn" editable="false" prefWidth="100.0" sortable="false" text="Model" />
+            <TableColumn fx:id="customerNameColumn" editable="false" prefWidth="100.0" sortable="false" text="Customer Name" />
             <TableColumn fx:id="statusColumn" editable="false" prefWidth="100.0" sortable="false" text="Status" />
             <TableColumn fx:id="priceColumn" editable="false" prefWidth="100.0" sortable="false" text="Price" />
         </columns>
