@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
@@ -70,7 +69,7 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void showAddItemPopUp() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/add-item-popup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/add-item-popup.fxml"));
         loader.setControllerFactory(param -> new AddItemViewController(this));
         Parent root = null;
 
@@ -84,7 +83,7 @@ public class MainViewController implements Initializable {
         addItemPopUpStage.initModality(Modality.APPLICATION_MODAL);
         addItemPopUpStage.setTitle("Add Item");
         addItemPopUpStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/stockfound-logo.jpg"))));
+                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
         addItemPopUpStage.setResizable(false);
         addItemPopUpStage.setScene(new Scene(root));
 
@@ -96,7 +95,7 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void showDeleteItemPopup(ActionEvent e) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/delete-item-popup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/delete-item-popup.fxml"));
         loader.setControllerFactory(param -> new DeleteItemViewController(this));
         Parent root = null;
 
@@ -110,7 +109,7 @@ public class MainViewController implements Initializable {
         deleteItemPopupStage.initModality(Modality.APPLICATION_MODAL);
         deleteItemPopupStage.setTitle("Delete Item");
         deleteItemPopupStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/stockfound-logo.jpg"))));
+                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
         deleteItemPopupStage.setResizable(false);
         deleteItemPopupStage.setScene(new Scene(root));
 
@@ -120,7 +119,7 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void showEditItemPopup(ActionEvent e){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/edit-item-popup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/edit-item-popup.fxml"));
         loader.setControllerFactory(param -> new EditItemViewController(this));
         Parent root = null;
 
@@ -134,7 +133,7 @@ public class MainViewController implements Initializable {
         editItemPopupStage.initModality(Modality.APPLICATION_MODAL);
         editItemPopupStage.setTitle("Edit Item");
         editItemPopupStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/stockfound-logo.jpg"))));
+                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
         editItemPopupStage.setScene(new Scene(root));
         editItemPopupStage.setResizable(false);
 

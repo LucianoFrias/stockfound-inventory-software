@@ -5,13 +5,20 @@ import org.stockfound.stockfoundinventorysoftware.database.Database;
 import org.stockfound.stockfoundinventorysoftware.database.ItemRepository;
 import org.stockfound.stockfoundinventorysoftware.database.PostgreSQLDatabase;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
+import org.stockfound.stockfoundinventorysoftware.utils.DatabaseCredentialsLoader;
 
 public class ItemService {
 
     private final ItemRepository itemRepository;
 
     public ItemService() {
-        Database database = new PostgreSQLDatabase("localhost", "5432", "stockfound_database", "postgres", "120708LUciano");
+        Database database = new PostgreSQLDatabase(
+                DatabaseCredentialsLoader.loadCredentials().host(),
+                DatabaseCredentialsLoader.loadCredentials().port(),
+                DatabaseCredentialsLoader.loadCredentials().database(),
+                DatabaseCredentialsLoader.loadCredentials().username(),
+                DatabaseCredentialsLoader.loadCredentials().password());
+
         this.itemRepository = new ItemRepository(database);
     }
 
