@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
@@ -68,7 +69,7 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    public void showAddItemPopUp(ActionEvent e) {
+    public void showAddItemPopUp() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/add-item-popup.fxml"));
         loader.setControllerFactory(param -> new AddItemViewController(this));
         Parent root = null;
@@ -84,6 +85,7 @@ public class MainViewController implements Initializable {
         addItemPopUpStage.setTitle("Add Item");
         addItemPopUpStage.getIcons().add(new Image(
                 String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/stockfound-logo.jpg"))));
+        addItemPopUpStage.setResizable(false);
         addItemPopUpStage.setScene(new Scene(root));
 
 
@@ -109,6 +111,7 @@ public class MainViewController implements Initializable {
         deleteItemPopupStage.setTitle("Delete Item");
         deleteItemPopupStage.getIcons().add(new Image(
                 String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/stockfound-logo.jpg"))));
+        deleteItemPopupStage.setResizable(false);
         deleteItemPopupStage.setScene(new Scene(root));
 
 
@@ -133,6 +136,7 @@ public class MainViewController implements Initializable {
         editItemPopupStage.getIcons().add(new Image(
                 String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/stockfound-logo.jpg"))));
         editItemPopupStage.setScene(new Scene(root));
+        editItemPopupStage.setResizable(false);
 
 
         editItemPopupStage.show();

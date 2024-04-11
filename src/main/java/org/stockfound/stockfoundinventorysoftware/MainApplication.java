@@ -25,6 +25,7 @@ public class MainApplication extends Application {
                 Objects.requireNonNull(
                         getClass().getResourceAsStream("stockfound-logo.jpg")
                 )));
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 
