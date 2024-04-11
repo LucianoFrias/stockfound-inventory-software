@@ -1,5 +1,9 @@
 package org.stockfound.stockfoundinventorysoftware.database;
 
+import javafx.scene.control.Alert;
+import javafx.stage.Modality;
+import org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -28,6 +32,11 @@ public class PostgreSQLDatabase implements Database{
         try {
             connection = DriverManager.getConnection(databaseUrl, username, password);
         } catch (SQLException | NullPointerException e) {
+            CustomJavaFX.showErrorPopUp(
+                    "Database Error",
+                    "Database Not Found",
+                    e.getMessage());
+
             throw new RuntimeException(e);
         }
 

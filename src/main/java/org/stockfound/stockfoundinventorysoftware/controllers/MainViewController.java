@@ -20,6 +20,7 @@ import org.stockfound.stockfoundinventorysoftware.services.ItemService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
@@ -146,6 +147,7 @@ public class MainViewController implements Initializable {
 
         itemTableView.setItems(items);
         itemTableView.refresh();
+
     }
 
     public void filterData(){
@@ -212,6 +214,7 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
         ObservableList<String> searchFilters = FXCollections.observableArrayList(
             "SEARCH BY ID",
