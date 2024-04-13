@@ -17,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
 import org.stockfound.stockfoundinventorysoftware.services.ItemService;
+import org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX;
 
 import java.io.IOException;
 import java.net.URL;
@@ -77,6 +78,7 @@ public class MainViewController implements Initializable {
         try {
             root = loader.load();
         } catch (IOException ex) {
+            CustomJavaFX.showErrorPopUp("Add Item Popup Error", "Add Item Popup Not Available", ex.getMessage());
             throw new RuntimeException(ex);
         }
 
@@ -103,6 +105,7 @@ public class MainViewController implements Initializable {
         try {
             root = loader.load();
         } catch (IOException ex) {
+            CustomJavaFX.showErrorPopUp("Delete Item Popup Error", "Delete Item Popup Not Available", ex.getMessage());
             throw new RuntimeException(ex);
         }
 
@@ -127,6 +130,7 @@ public class MainViewController implements Initializable {
         try {
             root = loader.load();
         } catch (IOException ex) {
+            CustomJavaFX.showErrorPopUp("Edit Item Popup Error", "Edit Item Popup Not Available", ex.getMessage());
             throw new RuntimeException(ex);
         }
 

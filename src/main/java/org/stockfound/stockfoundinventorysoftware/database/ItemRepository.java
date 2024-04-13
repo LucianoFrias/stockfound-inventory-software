@@ -3,6 +3,7 @@ package org.stockfound.stockfoundinventorysoftware.database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
+import org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX;
 
 import java.sql.*;
 
@@ -37,6 +38,7 @@ public class ItemRepository {
 
                 connection.close();
             } catch (SQLException e){
+                CustomJavaFX.showErrorPopUp("Add Item Error", "Can't add an item to database", e.getMessage());
                 throw new RuntimeException(e);
             }
 
@@ -57,6 +59,7 @@ public class ItemRepository {
 
             connection.close();
         } catch (SQLException e){
+            CustomJavaFX.showErrorPopUp("Delete Item Error", "Can't delete an item from database", e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -84,6 +87,7 @@ public class ItemRepository {
             connection.close();
 
         } catch (SQLException e){
+            CustomJavaFX.showErrorPopUp("Update Item Error", "Can't update an item from database", e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -116,6 +120,7 @@ public class ItemRepository {
 
         }
         catch (SQLException e){
+            CustomJavaFX.showErrorPopUp("Get Items Error", "Can't get items from database", e.getMessage());
             throw new RuntimeException(e);
         }
 
