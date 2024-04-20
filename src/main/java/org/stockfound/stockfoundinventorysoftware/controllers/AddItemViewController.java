@@ -21,7 +21,7 @@ import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.clos
 
 public class AddItemViewController implements Initializable {
     private final ItemService itemService;
-    private final MainViewController mainViewController;
+    private final ItemsViewController itemsViewController;
 
     @FXML
     private TextField serialNumberTextField;
@@ -42,8 +42,8 @@ public class AddItemViewController implements Initializable {
     @FXML
     private Button cancelButton;
 
-    public AddItemViewController(MainViewController mainViewController){
-        this.mainViewController = mainViewController;
+    public AddItemViewController(ItemsViewController itemsViewController){
+        this.itemsViewController = itemsViewController;
         this.itemService = new ItemService();
     }
 
@@ -65,7 +65,7 @@ public class AddItemViewController implements Initializable {
         );
 
         itemService.addItem(item);
-        mainViewController.fillTable();
+        itemsViewController.fillTable();
 
         closeWindow(cancelButton.getScene().getWindow());
     }

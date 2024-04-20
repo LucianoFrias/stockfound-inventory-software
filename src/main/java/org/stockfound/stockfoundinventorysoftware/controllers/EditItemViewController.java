@@ -21,7 +21,7 @@ import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.clos
 
 public class EditItemViewController implements Initializable {
     private final ItemService itemService;
-    private final MainViewController mainViewController;
+    private final ItemsViewController itemsViewController;
 
     @FXML
     private Label idLabel;
@@ -44,8 +44,8 @@ public class EditItemViewController implements Initializable {
     @FXML
     private Button cancelButton;
 
-    public EditItemViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
+    public EditItemViewController(ItemsViewController itemsViewController) {
+        this.itemsViewController = itemsViewController;
         this.itemService = new ItemService();
     }
 
@@ -64,7 +64,7 @@ public class EditItemViewController implements Initializable {
         );
 
         itemService.updateItem(item);
-        mainViewController.fillTable();
+        itemsViewController.fillTable();
 
         closeWindow(cancelButton.getScene().getWindow());
     }
@@ -74,7 +74,7 @@ public class EditItemViewController implements Initializable {
     }
 
     public void populateTextFields(){
-        Item item = mainViewController.getItemTableView().getSelectionModel().getSelectedItem();
+        Item item = itemsViewController.getItemTableView().getSelectionModel().getSelectedItem();
 
         serialNumberTextField.setText(item.getSerialNumber());
         customerNameTextField.setText(item.getCustomerName());
@@ -87,7 +87,7 @@ public class EditItemViewController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        idLabel.setText(Integer.toString(mainViewController.getItemTableView().getSelectionModel().getSelectedItem().getId()));
+        idLabel.setText(Integer.toString(itemsViewController.getItemTableView().getSelectionModel().getSelectedItem().getId()));
 
         ObservableList<String> statusChoices = FXCollections.observableArrayList(
                 "NEW",

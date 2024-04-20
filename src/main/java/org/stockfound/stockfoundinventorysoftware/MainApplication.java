@@ -13,7 +13,7 @@ import java.util.Objects;
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("views/main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("views/items-view.fxml"));
 
         Scene scene = null;
         try {
@@ -22,7 +22,7 @@ public class MainApplication extends Application {
             throw new RuntimeException(e);
         }
 
-        stage.setTitle("Stockfound");
+        stage.setTitle("Items");
         stage.getIcons().add(new Image(
                 Objects.requireNonNull(
                         getClass().getResourceAsStream("images/stockfound-logo.jpg")

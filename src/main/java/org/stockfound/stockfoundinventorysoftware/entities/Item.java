@@ -14,8 +14,8 @@ public class Item {
         private String status;
         private int price;
 
-
-    public Item(Date date, String serialNumber, String customerName, String type, String brand, String model, String status, int price) {
+    public Item(int id, Date date, String serialNumber, String customerName, String type, String brand, String model, String status, int price) {
+        this.id = id;
         this.date = date;
         this.serialNumber = serialNumber;
         this.customerName = customerName;
@@ -26,8 +26,7 @@ public class Item {
         this.price = price;
     }
 
-    public Item(int id, Date date, String serialNumber, String customerName, String type, String brand, String model, String status, Integer price) {
-        this.id = id;
+    public Item(Date date, String serialNumber, String customerName, String type, String brand, String model, String status, int price) {
         this.date = date;
         this.serialNumber = serialNumber;
         this.customerName = customerName;

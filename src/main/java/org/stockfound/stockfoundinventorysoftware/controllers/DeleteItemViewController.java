@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
 import org.stockfound.stockfoundinventorysoftware.services.ItemService;
 
@@ -17,7 +16,7 @@ import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.clos
 public class DeleteItemViewController implements Initializable {
 
     private final ItemService itemService;
-    private final MainViewController mainViewController;
+    private final ItemsViewController itemsViewController;
 
     @FXML
     private Label serialNumberLabel;
@@ -28,8 +27,8 @@ public class DeleteItemViewController implements Initializable {
     @FXML
     private Button deleteItemButton;
 
-    public DeleteItemViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
+    public DeleteItemViewController(ItemsViewController itemsViewController) {
+        this.itemsViewController = itemsViewController;
         this.itemService = new ItemService();
     }
 
@@ -40,15 +39,15 @@ public class DeleteItemViewController implements Initializable {
 
     @FXML
     public void onClickDeleteItem(ActionEvent e){
-        Item itemToDelete = mainViewController.getItemTableView().getSelectionModel().getSelectedItem();
+        Item itemToDelete = itemsViewController.getItemTableView().getSelectionModel().getSelectedItem();
 
         itemService.deleteItem(itemToDelete.getId());
-        mainViewController.fillTable();
+        itemsViewController.fillTable();
         closeWindow(cancelButton.getScene().getWindow());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Item item = mainViewController.getItemTableView().getSelectionModel().getSelectedItem();
+        Item item = itemsViewController.getItemTableView().getSelectionModel().getSelectedItem();
         serialNumberLabel.setText("Delete Item " + item.getSerialNumber() + "?");
         idLabel.setText("ID: " + item.getId());
     }

@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,10 +22,10 @@ import org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class MainViewController implements Initializable {
+public class ItemsViewController implements Initializable {
 
     // Classes
     private final ItemService itemService;
@@ -65,7 +66,7 @@ public class MainViewController implements Initializable {
     @FXML
     private Button editItemButton;
 
-    public MainViewController(){
+    public ItemsViewController(){
         this.itemService = new ItemService();
     }
 
@@ -146,6 +147,31 @@ public class MainViewController implements Initializable {
         editItemPopupStage.show();
     }
 
+
+    @FXML
+    public void changeToCustomersTab(ActionEvent event)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/customers-view.fxml"));
+            loader.setControllerFactory(param -> new CustomersViewController());
+            Parent root = loader.load();
+
+            Stage primaryStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            primaryStage.setScene(new Scene(root));
+            primaryStage.setTitle("Customers");
+
+            primaryStage.getIcons().add(new Image(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
+
+            primaryStage.show();
+
+        } catch (IOException ex) {
+            CustomJavaFX.showErrorPopUp("Customers View Error", "Customers View Not Available", ex.getMessage());
+            throw new RuntimeException(ex);
+        }
+
+    }
+
     public void fillTable() {
         ObservableList<Item> items = itemService.getAllItems();
 
@@ -211,6 +237,7 @@ public class MainViewController implements Initializable {
         itemTableView.setItems(sortedItems);
 
     }
+
 
     public TableView<Item> getItemTableView() {
         return itemTableView;
