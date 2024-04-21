@@ -45,7 +45,6 @@
          </font>
       </Label>
       <TextField fx:id="serialNumberTextField" layoutX="300.0" layoutY="80.0" />
-      <TextField fx:id="customerNameTextField" layoutX="300.0" layoutY="122.0" />
       <ChoiceBox fx:id="typeChoiceBox" layoutX="300.0" layoutY="163.0" prefWidth="150.0" />
       <TextField fx:id="brandTextField" layoutX="300.0" layoutY="202.0" />
       <TextField fx:id="modelTextField" layoutX="300.0" layoutY="244.0" />
@@ -63,5 +62,6 @@
             <Font name="Cambria Math" size="24.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="customerNameChoiceBox" layoutX="301.0" layoutY="122.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

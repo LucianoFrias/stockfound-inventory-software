@@ -42,7 +42,6 @@
          </font>
       </Label>
       <TextField fx:id="serialNumberTextField" layoutX="300.0" layoutY="48.0" />
-      <TextField fx:id="customerNameTextField" layoutX="300.0" layoutY="90.0" />
       <ChoiceBox fx:id="typeChoiceBox" layoutX="300.0" layoutY="131.0" prefWidth="150.0" />
       <TextField fx:id="brandTextField" layoutX="300.0" layoutY="170.0" />
       <TextField fx:id="modelTextField" layoutX="300.0" layoutY="212.0" />
@@ -50,5 +49,6 @@
       <TextField fx:id="priceTextField" layoutX="300.0" layoutY="299.0" />
       <Button fx:id="addItemButton" layoutX="358.0" layoutY="415.0" mnemonicParsing="false" onAction="#onClickAddItemButton" text="Add Item" />
       <Button fx:id="cancelButton" layoutX="178.0" layoutY="415.0" mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
+      <ChoiceBox fx:id="customerNameChoiceBox" layoutX="300.0" layoutY="90.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

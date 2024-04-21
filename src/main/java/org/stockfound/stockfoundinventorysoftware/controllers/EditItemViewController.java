@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
+import org.stockfound.stockfoundinventorysoftware.services.CustomerService;
 import org.stockfound.stockfoundinventorysoftware.services.ItemService;
 
 import java.net.URL;
@@ -21,6 +22,7 @@ import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.clos
 
 public class EditItemViewController implements Initializable {
     private final ItemService itemService;
+    private final CustomerService customerService;
     private final ItemsViewController itemsViewController;
 
     @FXML
@@ -28,7 +30,7 @@ public class EditItemViewController implements Initializable {
     @FXML
     private TextField serialNumberTextField;
     @FXML
-    private TextField customerNameTextField;
+    private ChoiceBox customerNameChoiceBox;
     @FXML
     private ChoiceBox typeChoiceBox;
     @FXML
@@ -47,6 +49,7 @@ public class EditItemViewController implements Initializable {
     public EditItemViewController(ItemsViewController itemsViewController) {
         this.itemsViewController = itemsViewController;
         this.itemService = new ItemService();
+        this.customerService = new CustomerService();
     }
 
     @FXML
@@ -55,7 +58,7 @@ public class EditItemViewController implements Initializable {
                 Integer.parseInt(idLabel.getText()),
                 Date.valueOf(LocalDate.now()),
                 serialNumberTextField.getText(),
-                customerNameTextField.getText(),
+                customerNameChoiceBox.getSelectionModel().getSelectedItem().toString(),
                 typeChoiceBox.getSelectionModel().getSelectedItem().toString(),
                 brandTextField.getText(),
                 modelTextField.getText(),
@@ -77,7 +80,7 @@ public class EditItemViewController implements Initializable {
         Item item = itemsViewController.getItemTableView().getSelectionModel().getSelectedItem();
 
         serialNumberTextField.setText(item.getSerialNumber());
-        customerNameTextField.setText(item.getCustomerName());
+        customerNameChoiceBox.getSelectionModel().select(item.getCustomerName());
         typeChoiceBox.getSelectionModel().select(item.getType());
         brandTextField.setText(item.getBrand());
         modelTextField.setText(item.getModel());
@@ -112,6 +115,8 @@ public class EditItemViewController implements Initializable {
                 "ROUTER",
                 "PENDRIVE");
 
+        ObservableList<String> customerNamesChoices = FXCollections.observableArrayList(customerService.getAllCustomerNames());
+
         statusChoiceBox.getItems().removeAll(statusChoiceBox.getItems());
         statusChoiceBox.getItems().addAll(statusChoices);
         statusChoiceBox.getSelectionModel().selectFirst();
@@ -119,6 +124,10 @@ public class EditItemViewController implements Initializable {
         typeChoiceBox.getItems().removeAll(typeChoiceBox.getItems());
         typeChoiceBox.getItems().addAll(typeChoices);
         typeChoiceBox.getSelectionModel().selectFirst();
+
+        customerNameChoiceBox.getItems().removeAll(customerNameChoiceBox.getItems());
+        customerNameChoiceBox.getItems().addAll(customerNamesChoices);
+        customerNameChoiceBox.getSelectionModel().selectFirst();
 
         populateTextFields();
 

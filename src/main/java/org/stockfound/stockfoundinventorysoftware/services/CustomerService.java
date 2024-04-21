@@ -1,5 +1,6 @@
 package org.stockfound.stockfoundinventorysoftware.services;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.stockfound.stockfoundinventorysoftware.entities.Customer;
 import org.stockfound.stockfoundinventorysoftware.database.CustomerRepository;
@@ -20,6 +21,18 @@ public class CustomerService {
                 DatabaseCredentialsLoader.loadCredentials().password());
 
         this.customerRepository = new CustomerRepository(database);
+    }
+
+
+    public ObservableList<String> getAllCustomerNames(){
+        ObservableList<String> customerNames = FXCollections.observableArrayList();
+
+        for (Customer customer : getAllCustomers())
+        {
+            customerNames.add(customer.getName());
+        }
+
+        return customerNames;
     }
 
     public ObservableList<Customer> getAllCustomers(){
