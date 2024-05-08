@@ -1,4 +1,4 @@
-package org.stockfound.stockfoundinventorysoftware.controllers;
+package org.stockfound.stockfoundinventorysoftware.controllers.main_controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +16,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_items.AddItemViewController;
+import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_items.DeleteItemViewController;
+import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_items.EditItemViewController;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
 import org.stockfound.stockfoundinventorysoftware.services.ItemService;
 import org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX;
@@ -149,16 +152,16 @@ public class ItemsViewController implements Initializable {
 
 
     @FXML
-    public void changeToCustomersTab(ActionEvent event)
+    public void changeToSellersTab(ActionEvent event)
     {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/customers-view.fxml"));
-            loader.setControllerFactory(param -> new CustomersViewController());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/sellers-view.fxml"));
+            loader.setControllerFactory(param -> new SellersViewController());
             Parent root = loader.load();
 
             Stage primaryStage = (Stage)((Node) event.getSource()).getScene().getWindow();
             primaryStage.setScene(new Scene(root));
-            primaryStage.setTitle("Customers");
+            primaryStage.setTitle("Stockfound");
 
             primaryStage.getIcons().add(new Image(
                     Objects.requireNonNull(getClass().getResourceAsStream("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));

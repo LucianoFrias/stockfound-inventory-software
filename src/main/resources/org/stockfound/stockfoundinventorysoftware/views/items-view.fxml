@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
@@ -21,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="546.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stockfound.stockfoundinventorysoftware.controllers.ItemsViewController">
+<AnchorPane prefHeight="546.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stockfound.stockfoundinventorysoftware.controllers.main_controllers.ItemsViewController">
    <children>
       <Accordion layoutX="14.0" layoutY="47.0" />
       <Pane layoutX="1.0" prefHeight="49.0" prefWidth="1030.0" style="-fx-background-color: #dedede;">
@@ -100,7 +101,7 @@
             <TableColumn fx:id="typeColumn" editable="false" prefWidth="100.0" sortable="false" text="Type" />
             <TableColumn fx:id="brandColumn" editable="false" prefWidth="116.0" sortable="false" text="Brand" />
             <TableColumn fx:id="modelColumn" editable="false" prefWidth="100.0" sortable="false" text="Model" />
-            <TableColumn fx:id="customerNameColumn" editable="false" prefWidth="100.0" sortable="false" text="Customer Name" />
+            <TableColumn fx:id="customerNameColumn" editable="false" prefWidth="100.0" sortable="false" text="Seller Name" />
             <TableColumn fx:id="statusColumn" editable="false" prefWidth="100.0" sortable="false" text="Status" />
             <TableColumn fx:id="priceColumn" editable="false" prefWidth="100.0" sortable="false" text="Price" />
         </columns>
@@ -139,12 +140,18 @@
                            </light>
                         </Lighting>
                      </effect>
+                     <tooltip>
+                        <Tooltip text="Items">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Tooltip>
+                     </tooltip>
                   </Button>
-                  <Button fx:id="customersTabButton" mnemonicParsing="false" onAction="#changeToCustomersTab" prefHeight="43.0" prefWidth="49.0">
+                  <Button fx:id="customersTabButton" ellipsisString="Sellers" mnemonicParsing="false" onAction="#changeToSellersTab" prefHeight="43.0" prefWidth="49.0">
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/customers_icon.png" />
+                              <Image url="@../images/sellers_icon.png" />
                            </image>
                            <viewport>
                               <Rectangle2D />
@@ -154,6 +161,12 @@
                            </cursor>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Sellers">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Tooltip>
+                     </tooltip>
                   </Button>
                </children>
             </VBox>

@@ -1,10 +1,11 @@
-package org.stockfound.stockfoundinventorysoftware.controllers;
+package org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_items;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.stockfound.stockfoundinventorysoftware.controllers.main_controllers.ItemsViewController;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
 import org.stockfound.stockfoundinventorysoftware.services.ItemService;
 

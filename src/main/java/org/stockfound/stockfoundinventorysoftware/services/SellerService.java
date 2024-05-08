@@ -2,17 +2,17 @@ package org.stockfound.stockfoundinventorysoftware.services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.stockfound.stockfoundinventorysoftware.entities.Customer;
-import org.stockfound.stockfoundinventorysoftware.database.CustomerRepository;
+import org.stockfound.stockfoundinventorysoftware.database.SellerRepository;
 import org.stockfound.stockfoundinventorysoftware.database.Database;
 import org.stockfound.stockfoundinventorysoftware.database.PostgreSQLDatabase;
+import org.stockfound.stockfoundinventorysoftware.entities.Seller;
 import org.stockfound.stockfoundinventorysoftware.utils.DatabaseCredentialsLoader;
 
-public class CustomerService {
+public class SellerService {
 
-    private final CustomerRepository customerRepository;
+    private final SellerRepository sellerRepository;
 
-    public CustomerService() {
+    public SellerService() {
         Database database = new PostgreSQLDatabase(
                 DatabaseCredentialsLoader.loadCredentials().host(),
                 DatabaseCredentialsLoader.loadCredentials().port(),
@@ -20,37 +20,40 @@ public class CustomerService {
                 DatabaseCredentialsLoader.loadCredentials().username(),
                 DatabaseCredentialsLoader.loadCredentials().password());
 
-        this.customerRepository = new CustomerRepository(database);
+        this.sellerRepository = new SellerRepository(database);
     }
 
 
-    public ObservableList<String> getAllCustomerNames(){
+    public ObservableList<Seller> getAllSellers(){
+        return sellerRepository.getAllSellers();
+    }
+
+    public ObservableList<String> getAllSellersNames(){
         ObservableList<String> customerNames = FXCollections.observableArrayList();
 
-        for (Customer customer : getAllCustomers())
+        for (Seller seller : getAllSellers())
         {
-            customerNames.add(customer.getName());
+            customerNames.add(seller.getName());
         }
 
         return customerNames;
     }
 
-    public ObservableList<Customer> getAllCustomers(){
-        return customerRepository.getAllCustomers();
+
+
+
+    public void deleteSeller(int id){
+
+        sellerRepository.deleteSeller(id);
     }
 
-    public void deleteCustomer(int id){
-
-        customerRepository.deleteCustomer(id);
-    }
-
-    public void addCustomer(Customer customer){
-        customerRepository.addCustomer(customer);
+    public void addSeller(Seller seller){
+        sellerRepository.addSeller(seller);
     }
 
 
-    public void updateCustomer(Customer customer) {
-        customerRepository.updateCustomer(customer);
+    public void updateSeller(Seller seller) {
+        sellerRepository.updateSeller(seller);
     }
 
 }

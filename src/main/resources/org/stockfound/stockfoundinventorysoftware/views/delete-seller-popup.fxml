@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="204.0" prefWidth="582.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_sellers.DeleteSellerViewController">
+   <children>
+      <Label fx:id="nameLabel" layoutX="151.0" layoutY="26.0" text="Delete Seller NAME_LABEL">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="deleteItemButton" layoutX="346.0" layoutY="134.0" mnemonicParsing="false" onAction="#onClickDeleteSeller" text="Yes, delete" />
+      <Button fx:id="cancelButton" layoutX="183.0" layoutY="134.0" mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
+      <Label fx:id="idLabel" layoutX="253.0" layoutY="73.0" text="ID:  ID?">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

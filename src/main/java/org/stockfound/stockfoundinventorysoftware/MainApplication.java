@@ -22,7 +22,7 @@ public class MainApplication extends Application {
             throw new RuntimeException(e);
         }
 
-        stage.setTitle("Items");
+        stage.setTitle("Stockfound");
         stage.getIcons().add(new Image(
                 Objects.requireNonNull(
                         getClass().getResourceAsStream("images/stockfound-logo.jpg")
