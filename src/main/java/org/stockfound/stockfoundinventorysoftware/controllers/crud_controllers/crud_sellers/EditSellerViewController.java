@@ -57,6 +57,7 @@ public class EditSellerViewController implements Initializable {
         closeWindow(cancelButton.getScene().getWindow());
     }
 
+    @FXML
     public void populateTextFields(){
         Seller seller = sellersViewController.getSellerTableView().getSelectionModel().getSelectedItem();
 

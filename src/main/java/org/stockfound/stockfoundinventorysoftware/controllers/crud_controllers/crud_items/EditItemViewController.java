@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.closeWindow;
+import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.insertItemsIntoChoiceBox;
 
 public class EditItemViewController implements Initializable {
     private final ItemService itemService;
@@ -77,6 +78,7 @@ public class EditItemViewController implements Initializable {
         closeWindow(cancelButton.getScene().getWindow());
     }
 
+    @FXML
     public void populateTextFields(){
         Item item = itemsViewController.getItemTableView().getSelectionModel().getSelectedItem();
 
@@ -119,17 +121,9 @@ public class EditItemViewController implements Initializable {
 
         ObservableList<String> customerNamesChoices = FXCollections.observableArrayList(sellerService.getAllSellersNames());
 
-        statusChoiceBox.getItems().removeAll(statusChoiceBox.getItems());
-        statusChoiceBox.getItems().addAll(statusChoices);
-        statusChoiceBox.getSelectionModel().selectFirst();
-
-        typeChoiceBox.getItems().removeAll(typeChoiceBox.getItems());
-        typeChoiceBox.getItems().addAll(typeChoices);
-        typeChoiceBox.getSelectionModel().selectFirst();
-
-        customerNameChoiceBox.getItems().removeAll(customerNameChoiceBox.getItems());
-        customerNameChoiceBox.getItems().addAll(customerNamesChoices);
-        customerNameChoiceBox.getSelectionModel().selectFirst();
+        insertItemsIntoChoiceBox(statusChoiceBox, statusChoices);
+        insertItemsIntoChoiceBox(typeChoiceBox, typeChoices);
+        insertItemsIntoChoiceBox(customerNameChoiceBox, customerNamesChoices);
 
         populateTextFields();
 

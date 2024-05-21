@@ -6,27 +6,19 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_items.AddItemViewController;
 import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_items.DeleteItemViewController;
 import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_items.EditItemViewController;
 import org.stockfound.stockfoundinventorysoftware.entities.Item;
 import org.stockfound.stockfoundinventorysoftware.services.ItemService;
-import org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.*;
 
 public class ItemsViewController implements Initializable {
 
@@ -41,7 +33,7 @@ public class ItemsViewController implements Initializable {
     @FXML
     private TableView<Item> itemTableView;
 
-    // Columns
+    // Table Columns
     @FXML
     private TableColumn<Item, Integer> idColumn;
     @FXML
@@ -74,105 +66,41 @@ public class ItemsViewController implements Initializable {
     }
 
     @FXML
-    public void showAddItemPopUp() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/add-item-popup.fxml"));
-        loader.setControllerFactory(param -> new AddItemViewController(this));
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException ex) {
-            CustomJavaFX.showErrorPopUp("Add Item Popup Error", "Add Item Popup Not Available", ex.getMessage());
-            throw new RuntimeException(ex);
-        }
-
-        Stage addItemPopUpStage = new Stage();
-        addItemPopUpStage.initModality(Modality.APPLICATION_MODAL);
-        addItemPopUpStage.setTitle("Add Item");
-        addItemPopUpStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
-        addItemPopUpStage.setResizable(false);
-        addItemPopUpStage.setScene(new Scene(root));
-
-
-        addItemPopUpStage.show();
-
-
+    public void showAddItemWindow() {
+        openWindow(
+                "/org/stockfound/stockfoundinventorysoftware/views/add-item-popup.fxml",
+                new AddItemViewController(this),
+                "Add Item"
+        );
     }
 
     @FXML
-    public void showDeleteItemPopup(ActionEvent e) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/delete-item-popup.fxml"));
-        loader.setControllerFactory(param -> new DeleteItemViewController(this));
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException ex) {
-            CustomJavaFX.showErrorPopUp("Delete Item Popup Error", "Delete Item Popup Not Available", ex.getMessage());
-            throw new RuntimeException(ex);
-        }
-
-        Stage deleteItemPopupStage = new Stage();
-        deleteItemPopupStage.initModality(Modality.APPLICATION_MODAL);
-        deleteItemPopupStage.setTitle("Delete Item");
-        deleteItemPopupStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
-        deleteItemPopupStage.setResizable(false);
-        deleteItemPopupStage.setScene(new Scene(root));
-
-
-        deleteItemPopupStage.show();
+    public void showDeleteItemWindow(ActionEvent e) {
+        openWindow(
+                "/org/stockfound/stockfoundinventorysoftware/views/delete-item-popup.fxml",
+                new DeleteItemViewController(this),
+                "Delete Item"
+        );
     }
 
     @FXML
-    public void showEditItemPopup(ActionEvent e){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/edit-item-popup.fxml"));
-        loader.setControllerFactory(param -> new EditItemViewController(this));
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException ex) {
-            CustomJavaFX.showErrorPopUp("Edit Item Popup Error", "Edit Item Popup Not Available", ex.getMessage());
-            throw new RuntimeException(ex);
-        }
-
-        Stage editItemPopupStage = new Stage();
-        editItemPopupStage.initModality(Modality.APPLICATION_MODAL);
-        editItemPopupStage.setTitle("Edit Item");
-        editItemPopupStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
-        editItemPopupStage.setScene(new Scene(root));
-        editItemPopupStage.setResizable(false);
-
-
-        editItemPopupStage.show();
+    public void showEditItemWindow(ActionEvent e){
+        openWindow(
+                "/org/stockfound/stockfoundinventorysoftware/views/edit-item-popup.fxml",
+                new EditItemViewController(this),
+                "Edit Item"
+        );
     }
 
 
     @FXML
     public void changeToSellersTab(ActionEvent event)
     {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/sellers-view.fxml"));
-            loader.setControllerFactory(param -> new SellersViewController());
-            Parent root = loader.load();
-
-            Stage primaryStage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            primaryStage.setScene(new Scene(root));
-            primaryStage.setTitle("Stockfound");
-
-            primaryStage.getIcons().add(new Image(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
-
-            primaryStage.show();
-
-        } catch (IOException ex) {
-            CustomJavaFX.showErrorPopUp("Customers View Error", "Customers View Not Available", ex.getMessage());
-            throw new RuntimeException(ex);
-        }
-
+        changeTab(
+                "/org/stockfound/stockfoundinventorysoftware/views/sellers-view.fxml",
+                new SellersViewController(),
+                event
+        );
     }
 
     public void fillTable() {
@@ -180,16 +108,16 @@ public class ItemsViewController implements Initializable {
 
         itemTableView.setItems(items);
         itemTableView.refresh();
-
     }
 
     public void filterData(){
-        FilteredList<Item> filteredItems = new FilteredList<Item>(itemService.getAllItems(), b -> true);
+        FilteredList<Item> filteredItems = new FilteredList<>(itemService.getAllItems(), b -> true);
 
         itemSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredItems.setPredicate(item -> {
 
                 String lowerCaseFilter = newValue.toLowerCase();
+
 
                 if (itemSearchFilters.getSelectionModel().getSelectedItem() == "SEARCH BY ID" && Integer.toString(item.getId()).equals(lowerCaseFilter)){
                     return true;
@@ -227,7 +155,6 @@ public class ItemsViewController implements Initializable {
                     return true;
                 }
 
-
                 return false;
             });
 
@@ -241,10 +168,10 @@ public class ItemsViewController implements Initializable {
 
     }
 
-
     public TableView<Item> getItemTableView() {
         return itemTableView;
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -262,9 +189,7 @@ public class ItemsViewController implements Initializable {
                 "SEARCH BY PRICE"
         );
 
-        itemSearchFilters.getItems().removeAll(itemSearchFilters.getItems());
-        itemSearchFilters.getItems().addAll(searchFilters);
-        itemSearchFilters.getSelectionModel().selectFirst();
+        insertItemsIntoChoiceBox(itemSearchFilters, searchFilters);
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));

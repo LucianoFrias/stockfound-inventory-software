@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -17,18 +16,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_items.DeleteItemViewController;
 import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_sellers.AddSellerViewController;
 import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_sellers.DeleteSellerViewController;
 import org.stockfound.stockfoundinventorysoftware.controllers.crud_controllers.crud_sellers.EditSellerViewController;
-import org.stockfound.stockfoundinventorysoftware.entities.Item;
 import org.stockfound.stockfoundinventorysoftware.entities.Seller;
 import org.stockfound.stockfoundinventorysoftware.services.SellerService;
-import org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX;
+import static org.stockfound.stockfoundinventorysoftware.utils.CustomJavaFX.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SellersViewController implements Initializable {
@@ -38,15 +34,15 @@ public class SellersViewController implements Initializable {
     // FXML
 
     @FXML
-    private TableView<org.stockfound.stockfoundinventorysoftware.entities.Seller> sellerTableView;
+    private TableView<Seller> sellerTableView;
     @FXML
-    private TableColumn<org.stockfound.stockfoundinventorysoftware.entities.Seller, Integer> idColumn;
+    private TableColumn<Seller, Integer> idColumn;
     @FXML
-    private TableColumn<org.stockfound.stockfoundinventorysoftware.entities.Seller, String> customerNameColumn;
+    private TableColumn<Seller, String> customerNameColumn;
     @FXML
-    private TableColumn<org.stockfound.stockfoundinventorysoftware.entities.Seller, String> customerAddressColumn;
+    private TableColumn<Seller, String> customerAddressColumn;
     @FXML
-    private TableColumn<org.stockfound.stockfoundinventorysoftware.entities.Seller, String> customerPhoneNumberColumn;
+    private TableColumn<Seller, String> customerPhoneNumberColumn;
     @FXML
     private TextField sellerSearchBar;
 
@@ -94,113 +90,50 @@ public class SellersViewController implements Initializable {
     @FXML
     public void changeToItemsTab(ActionEvent event)
     {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/items-view.fxml"));
-            loader.setControllerFactory(param -> new ItemsViewController());
-            Parent root = loader.load();
-
-            Stage primaryStage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            primaryStage.setScene(new Scene(root));
-            primaryStage.setTitle("Stockfound");
-
-            primaryStage.getIcons().add(new Image(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
-
-            primaryStage.show();
-
-        } catch (IOException ex) {
-            CustomJavaFX.showErrorPopUp("Items View Error", "Items View Not Available", ex.getMessage());
-            throw new RuntimeException(ex);
-        }
+        changeTab(
+                "/org/stockfound/stockfoundinventorysoftware/views/items-view.fxml",
+                new ItemsViewController(),
+                event
+        );
 
     }
 
     @FXML
     public void showAddSellerPopup() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/add-seller-popup.fxml"));
-        loader.setControllerFactory(param -> new AddSellerViewController(this));
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException ex) {
-            CustomJavaFX.showErrorPopUp("Add Seller Popup Error", "Add Seller Popup Not Available", ex.getMessage());
-            throw new RuntimeException(ex);
-        }
-
-        Stage addItemPopUpStage = new Stage();
-        addItemPopUpStage.initModality(Modality.APPLICATION_MODAL);
-        addItemPopUpStage.setTitle("Add Seller");
-        addItemPopUpStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
-        addItemPopUpStage.setResizable(false);
-        addItemPopUpStage.setScene(new Scene(root));
-
-
-        addItemPopUpStage.show();
+        openWindow(
+                "/org/stockfound/stockfoundinventorysoftware/views/add-seller-popup.fxml",
+                new AddSellerViewController(this),
+                "Add Seller"
+        );
     }
 
     @FXML
     public void showEditSellerPopup() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/edit-seller-popup.fxml"));
-        loader.setControllerFactory(param -> new EditSellerViewController(this));
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException ex) {
-            CustomJavaFX.showErrorPopUp("Edit Seller Popup Error", "Edit Seller Popup Not Available", ex.getMessage());
-            throw new RuntimeException(ex);
-        }
-
-        Stage addItemPopUpStage = new Stage();
-        addItemPopUpStage.initModality(Modality.APPLICATION_MODAL);
-        addItemPopUpStage.setTitle("Edit Seller");
-        addItemPopUpStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
-        addItemPopUpStage.setResizable(false);
-        addItemPopUpStage.setScene(new Scene(root));
-
-
-        addItemPopUpStage.show();
-
-
+       openWindow(
+               "/org/stockfound/stockfoundinventorysoftware/views/edit-seller-popup.fxml",
+               new EditSellerViewController(this),
+               "Edit Seller"
+       );
     }
 
     @FXML
     public void showDeleteSellerPopup() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/views/delete-seller-popup.fxml"));
-        loader.setControllerFactory(param -> new DeleteSellerViewController(this));
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException ex) {
-            CustomJavaFX.showErrorPopUp("Delete Seller Popup Error", "Delete Seller Popup Not Available", ex.getMessage());
-            throw new RuntimeException(ex);
-        }
-
-        Stage deleteItemPopupStage = new Stage();
-        deleteItemPopupStage.initModality(Modality.APPLICATION_MODAL);
-        deleteItemPopupStage.setTitle("Delete Seller");
-        deleteItemPopupStage.getIcons().add(new Image(
-                String.valueOf(getClass().getResource("/org/stockfound/stockfoundinventorysoftware/images/stockfound-logo.jpg"))));
-        deleteItemPopupStage.setResizable(false);
-        deleteItemPopupStage.setScene(new Scene(root));
-
-
-        deleteItemPopupStage.show();
+        openWindow(
+                "/org/stockfound/stockfoundinventorysoftware/views/delete-seller-popup.fxml",
+                new DeleteSellerViewController(this),
+                "Delete Seller"
+        );
     }
 
     public void fillTable() {
-        ObservableList<org.stockfound.stockfoundinventorysoftware.entities.Seller> sellers = sellerService.getAllSellers();
+        ObservableList<Seller> sellers = sellerService.getAllSellers();
 
         sellerTableView.setItems(sellers);
         sellerTableView.refresh();
 
     }
 
-    public TableView<org.stockfound.stockfoundinventorysoftware.entities.Seller> getSellerTableView() {
+    public TableView<Seller> getSellerTableView() {
         return sellerTableView;
     }
     @Override
